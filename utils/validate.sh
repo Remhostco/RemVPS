@@ -151,3 +151,10 @@ remvps_validate_memory() {
 
     return 0
 }
+remvps_container_exists() {
+    local name="$1"
+
+    [[ -z "$name" ]] && return 1
+
+    docker inspect "$name" >/dev/null 2>&1
+}

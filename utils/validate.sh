@@ -102,3 +102,16 @@ remvps_validate_hostname() {
 
     return 0
 }
+remvps_validate_password() {
+    local pass="$1"
+
+    [[ -z "$pass" ]] && return 1
+
+    # minimum length
+    [[ ${#pass} -lt 6 ]] && return 1
+
+    # avoid spaces
+    [[ "$pass" =~ [[:space:]] ]] && return 1
+
+    return 0
+}

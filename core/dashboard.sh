@@ -24,13 +24,14 @@ remvps_dashboard_cpu() {
 
 # remvps_dashboard_ram — get RAM usage as "USED / TOTAL (PCT%)"
 remvps_dashboard_ram() {
-    local total used free pct
-    if ! read -r _ total _ <<< "$(grep '^MemTotal:' /proc/meminfo 2>/dev/null)"; then
-        printf 'unavailable'; return
-    fi
-    if ! read -r _ free <<< "$(grep '^MemAvailable:' /proc/meminfo 2>/dev/null)"; then
-        printf 'unavailable'; return
-    fi
+    local total free used total_mb pct
+    total=$(awk '/^MemTotal:/ {print $2}' /proc/meminfo)
+free=$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo)
+
+if [[ -z "$total" || -z "$free" ]]; then
+    printf 'unavailable'
+    return
+fi
     used=$(( (total - free) / 1024 ))
     total_mb=$(( total / 1024 ))
     pct=$(( (total - free) * 100 / total ))

@@ -70,3 +70,17 @@ remvps_config_get() {
     local val="${!key:-}"
     printf '%s' "${val:-$default}"
 }
+remvps_validate_container_name() {
+    local name="$1"
+
+    # empty check
+    [[ -z "$name" ]] && return 1
+
+    # length check
+    [[ ${#name} -gt 128 ]] && return 1
+
+    # allowed characters only
+    [[ "$name" =~ ^[a-zA-Z0-9._-]+$ ]] || return 1
+
+    return 0
+}

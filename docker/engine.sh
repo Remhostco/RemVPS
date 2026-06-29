@@ -97,7 +97,7 @@ remvps_docker_create() {
     "${resource_flags[@]}" \
     --volume "${init_script}:/remvps_init.sh:ro" \
     "$tag" bash
-
+}
 # remvps_generate_init_script PATH HOSTNAME ROOT_PASS OS_IMAGE
 # Writes a one-time initialization script for the container.
 remvps_generate_init_script() {

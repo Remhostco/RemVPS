@@ -87,7 +87,7 @@ remvps_docker_create() {
     local init_script="${REMVPS_BUILD_DIR}/init_${name}.sh"
     remvps_generate_init_script "$init_script" "$hostname" "$root_pass" "$os_image"
 
-    docker create -it \
+    docker run -dit \
         --label "${REMVPS_LABEL}" \
         --label "${REMVPS_META_LABEL_OS}=${os_image}" \
         --label "${REMVPS_META_LABEL_HOSTNAME}=${hostname}" \
@@ -270,7 +270,7 @@ remvps_docker_inspect() {
     printf 'HOSTNAME=%s\n'        "$hostname_label"
     printf 'CREATED=%s\n'         "$created"
     printf 'CPU_LIMIT=%s\n'       "${cpu:-(none)}"
-    printf 'RAM_LIMIT=%s\n'       "${mem:-(none)}"
+    printf 'RAM_LIMIT=%s\n' "$(numfmt --to=iec ${mem} 2>/dev/null || echo "${mem}")"
     printf 'DOCKER_IMAGE=%s\n'    "$image"
     printf 'IP_ADDRESS=%s\n'      "${ip:-(not running)}"
 }

@@ -88,16 +88,15 @@ remvps_docker_create() {
     remvps_generate_init_script "$init_script" "$hostname" "$root_pass" "$os_image"
 
     docker run -dit \
-        --label "${REMVPS_LABEL}" \
-        --label "${REMVPS_META_LABEL_OS}=${os_image}" \
-        --label "${REMVPS_META_LABEL_HOSTNAME}=${hostname}" \
-        --label "${REMVPS_META_LABEL_CREATED}=${created_at}" \
-        --name "$name" \
-        --hostname "$hostname" \
-        "${resource_flags[@]}" \
-        --volume "${init_script}:/remvps_init.sh:ro" \
-        "$tag" bash &>/dev/null
-}
+    --label "${REMVPS_LABEL}" \
+    --label "${REMVPS_META_LABEL_OS}=${os_image}" \
+    --label "${REMVPS_META_LABEL_HOSTNAME}=${hostname}" \
+    --label "${REMVPS_META_LABEL_CREATED}=${created_at}" \
+    --name "$name" \
+    --hostname "$hostname" \
+    "${resource_flags[@]}" \
+    --volume "${init_script}:/remvps_init.sh:ro" \
+    "$tag" bash
 
 # remvps_generate_init_script PATH HOSTNAME ROOT_PASS OS_IMAGE
 # Writes a one-time initialization script for the container.

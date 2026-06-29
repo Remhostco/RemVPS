@@ -131,3 +131,23 @@ remvps_validate_cpu() {
 
     return 0
 }
+remvps_validate_memory() {
+    local mem="$1"
+
+    [[ -z "$mem" ]] && return 1
+
+    # format: number + unit (m or g)
+    # examples: 512m, 1g, 2G, 1024M
+    if [[ ! "$mem" =~ ^[0-9]+[mMgG]$ ]]; then
+        return 1
+    fi
+
+    # split number and unit
+    local value="${mem%[mMgG]}"
+    local unit="${mem: -1}"
+
+    # must be > 0
+    [[ "$value" -le 0 ]] && return 1
+
+    return 0
+}

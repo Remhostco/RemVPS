@@ -269,7 +269,7 @@ remvps_docker_inspect() {
     printf 'HOSTNAME=%s\n'        "$hostname_label"
     printf 'CREATED=%s\n'         "$created"
     printf 'CPU_LIMIT=%s\n'       "${cpu:-(none)}"
-    printf 'RAM_LIMIT=%s\n' "$(numfmt --to=iec ${mem} 2>/dev/null || echo "${mem}")"
+    printf 'RAM_LIMIT=%s\n'       "${mem:-(none)}"
     printf 'DOCKER_IMAGE=%s\n'    "$image"
     printf 'IP_ADDRESS=%s\n'      "${ip:-(not running)}"
 }

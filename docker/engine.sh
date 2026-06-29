@@ -215,8 +215,7 @@ remvps_docker_open() {
 remvps_docker_list_all() {
     docker ps -a \
         --filter "label=${REMVPS_LABEL}" \
-        --format '{{.Names}}\t{{.Status}}\t{{.ID}}' \
-        2>/dev/null
+        --format '{{.Names}}\t{{.Status}}\t{{.ID}}'
 }
 
 # remvps_docker_count_running — count of running REMVPS containers

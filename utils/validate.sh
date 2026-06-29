@@ -115,3 +115,19 @@ remvps_validate_password() {
 
     return 0
 }
+remvps_validate_cpu() {
+    local cpu="$1"
+
+    # empty check (handled elsewhere, but safe)
+    [[ -z "$cpu" ]] && return 1
+
+    # must be a number (integer or decimal)
+    if ! [[ "$cpu" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+        return 1
+    fi
+
+    # must be greater than 0
+    awk "BEGIN {exit !($cpu > 0)}" || return 1
+
+    return 0
+}

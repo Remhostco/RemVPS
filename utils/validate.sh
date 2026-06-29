@@ -84,3 +84,21 @@ remvps_validate_container_name() {
 
     return 0
 }
+remvps_validate_hostname() {
+    local name="$1"
+
+    # empty check
+    [[ -z "$name" ]] && return 1
+
+    # length limit (RFC safe hostname max is 63 chars per label)
+    [[ ${#name} -gt 63 ]] && return 1
+
+    # allowed: letters, numbers, hyphen only
+    [[ "$name" =~ ^[a-zA-Z0-9-]+$ ]] || return 1
+
+    # must not start or end with hyphen
+    [[ "$name" =~ ^- ]] && return 1
+    [[ "$name" =~ -$ ]] && return 1
+
+    return 0
+}

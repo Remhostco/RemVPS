@@ -25,7 +25,7 @@ A modular, terminal-based Docker VPS manager written in Bash.
 ## Installation
 
 ```bash
-git clone <repo-url> remvps
+git clone https://github.com/remhostco/remvps.git
 cd remvps
 bash install.sh
 ```
@@ -36,35 +36,6 @@ After installation, run:
 remvps
 ```
 
-## Project Structure
-
-```
-remvps/
-├── remvps.sh          # Entry point
-├── install.sh         # Host-side installer
-├── assets/
-│   └── logo.txt       # ASCII logo (displayed at startup)
-├── backup/
-│   └── backup.sh      # Backup, restore, and Git push
-├── config/
-│   └── config.sh      # Settings load/save
-├── core/
-│   ├── dashboard.sh   # System metrics dashboard
-│   ├── menu.sh        # Main menu loop
-│   ├── settings.sh    # Settings submenu
-│   ├── startup.sh     # Pre-flight checks
-│   └── vps_ops.sh     # VPS create/list/open/start/stop/restart/delete/info
-├── docker/
-│   └── engine.sh      # All Docker API calls
-├── os/
-│   └── packages.sh    # OS-specific Dockerfile snippets
-├── ui/
-│   ├── colors.sh      # ANSI color constants
-│   └── draw.sh        # Terminal UI primitives
-└── utils/
-    ├── log.sh         # Structured file logging
-    └── validate.sh    # Input validation helpers
-```
 
 ## Supported Operating Systems (container)
 
